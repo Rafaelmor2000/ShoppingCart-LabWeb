@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Good Thymes Virtual Grocery: Inventory</title>
+  </head>
+
+  <body>
+  
+    <p th:text="${title}"></p>
+    <p th:text="${message}"></p>
+
+      <table>
+        <tr>
+          <th>ItemID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <tr th:each="item,iterator: ${items}">
+          <td th:text="${item.getValue().itemId}"></td>
+          <td th:text="${item.getValue().name}"></td>
+          <td th:text="${item.getValue().price}"></td>
+          <td>
+            <form method="get" th:id="${item.getValue().itemId}" action="/inventory/addItems">
+              <input type="number" th:name="quantity" th:value="0"/>
+              <button type="submit" th:name="action" th:value="${item.getValue().itemId}">Agregar Item</button>
+            </form>
+          </td>
+        </tr>
+      <table>
+      <a href="/cart">Back to cart</a>
+  </body>
+  
+</html>
